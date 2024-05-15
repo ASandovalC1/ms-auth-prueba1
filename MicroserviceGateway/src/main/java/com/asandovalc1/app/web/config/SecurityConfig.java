@@ -33,16 +33,22 @@ public class SecurityConfig {
     public SecurityWebFilterChain filterChain(ServerHttpSecurity http ,JwtFilter jwtFilter) throws Exception{
         http
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
-                .authorizeExchange(exanges -> exanges
-                        .pathMatchers("/micro-auth/api/**").permitAll()
-                        .anyExchange().authenticated()
+                .authorizeExchange(exchanges -> exchanges
+                        .anyExchange().permitAll()
                 )
+//                .authorizeExchange(exanges -> exanges
+//                        .pathMatchers("/micro-auth/api/**").permitAll()
+////                        .pathMatchers("/micro-users/users/search/find-username").permitAll()
+//                        .anyExchange().authenticated()
+//                )
+//                .authorizeExchange(exanges -> exanges
+////                                .pathMatchers("/micro-auth/api/**").permitAll()
+////                        .pathMatchers("/micro-users/users/search/find-username").permitAll()
+//                                .anyExchange().permitAll()
+//                )
                 .addFilterAfter(jwtFilter,SecurityWebFiltersOrder.FIRST)
                 .cors(cors->cors.disable());
 //                .httpBasic(Customizer.withDefaults());
-//                .addFilterAt(jwtFilter,SecurityWebFiltersOrder.FIRST);
-
-
         return http.build();
     }
 

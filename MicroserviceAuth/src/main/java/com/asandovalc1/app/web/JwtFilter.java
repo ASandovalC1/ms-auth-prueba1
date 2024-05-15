@@ -15,7 +15,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-@Component
+//@Component
 public class JwtFilter extends OncePerRequestFilter{
 
     private final JwtUtils jwtUtils;
@@ -27,7 +27,7 @@ public class JwtFilter extends OncePerRequestFilter{
     }
 
 
-    @Override
+//    @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         //1. validar que sea un header auth valid
         String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);

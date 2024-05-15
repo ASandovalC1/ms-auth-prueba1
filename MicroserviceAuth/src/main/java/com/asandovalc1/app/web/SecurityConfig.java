@@ -23,12 +23,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfig {
-    private final JwtFilter jwtFilter;
-
-    @Autowired
-    public SecurityConfig(JwtFilter jwtFilter) {
-        this.jwtFilter = jwtFilter;
-    }
+//    private final JwtFilter jwtFilter;
+//
+//    @Autowired
+//    public SecurityConfig(JwtFilter jwtFilter) {
+//        this.jwtFilter = jwtFilter;
+//    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -38,20 +38,20 @@ public class SecurityConfig {
                 .sessionManagement(sees->sees.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(customizeRequest ->{
                     customizeRequest
-                            .requestMatchers("/api/auth/**").permitAll()
+//                            .requestMatchers("/api/auth/**").permitAll()
 //                            .requestMatchers(HttpMethod.GET,"/api/customers/**").hasAnyRole("ADMIN","CUSTOMER")
 //                            .requestMatchers(HttpMethod.GET,"/api/pizzas/**").hasAnyRole("ADMIN","CUSTOMER")
 //                            .requestMatchers(HttpMethod.POST,"/api/pizzas/**").hasRole("ADMIN")
 //                            .requestMatchers(HttpMethod.PUT).hasRole("ADMIN")
 //                            .requestMatchers("/api/orders/random").hasAuthority("random_order")
 //                            .requestMatchers("/api/orders/**").hasRole("ADMIN")
-//                            .anyRequest().permitAll();
-                            .anyRequest().authenticated();
+                            .anyRequest().permitAll();
+//                            .anyRequest().authenticated();
 
 
-                })
+                });
 //                .httpBasic(Customizer.withDefaults());
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+//                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
